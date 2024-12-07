@@ -1,16 +1,23 @@
-import express, { Request, Response } from "express";
+import express, { Application, Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import bodyParser from "body-parser";
+import cors from "cors";
+import authRoutes from "./routes/authRoutes";
+import { PORT } from "./config";
 
-const app = express();
-const PORT = 3000;
+const app: Application = express();
 
-app.use(express.json());
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
 
-app.get("/api", (req: Request, res: Response) =>
-{
-    res.send("Hello, world!");
-});
+// Trasy
+app.use("/auth", authRoutes);
 
+// Start serwera
 app.listen(PORT, () =>
 {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Serwer działa na porcie ${PORT}`);
 });
+
