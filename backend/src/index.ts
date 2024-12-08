@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import bodyParser from "body-parser";
 import cors from "cors";
-import authRoutes from "./routes/authRoutes";
+import router from "./routes/authRoutes";
 import { PORT } from "./config";
 
 const app: Application = express();
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Trasy
-app.use("/auth", authRoutes);
+app.use("/auth", router);
 
 // Start serwera
 app.listen(PORT, () =>
